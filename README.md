@@ -6,6 +6,20 @@ An LLM-guided unified MAC scheduling architecture for 5G that targets:
 - **Slice isolation and SLA adherence**
 
 > Core principle: **Use LLMs for policy intelligence, not per-slot scheduling execution**.
+NOTE:
+
+It means:
+
+* Per-slot scheduling (every 0.5–1 ms) is extremely time-critical.
+* An LLM is too variable/slow for that hard real-time loop.
+* So the LLM should not decide “which UE gets which PRBs this slot.
+  
+Instead:
+
+* LLM works at a slower control loop (seconds/minutes),
+* analyzes KPIs (URLLC misses, eMBB throughput, slice violations),
+* proposes bounded policy changes (weights, slice min/max caps),
+* and a deterministic scheduler applies those settings in real time.
 
 ---
 
